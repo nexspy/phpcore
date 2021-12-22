@@ -88,6 +88,7 @@ class LicenceReader
 
     /**
      * Save : list of licences to database table "driver"
+     * @param array $licence
      */
     public function saveLicences($items) {
         foreach ($items as $item) {
@@ -97,6 +98,8 @@ class LicenceReader
     
     /**
      * Save : list of licences to json file
+     * @param array $item
+     * @return array
      */
     public function saveLicence($item) {
         $result = [
