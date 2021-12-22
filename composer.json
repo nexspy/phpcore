@@ -1,0 +1,12 @@
+{
+    "name": "nirmallimbu/phpcore",
+    "authors": [
+        {
+            "name": "Number 4",
+            "email": "nirmalmaswa@live.com"
+        }
+    ],
+    "require": {
+        "simplon/mysql": "^2.2"
+    }
+}
