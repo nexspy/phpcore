@@ -1,35 +1,42 @@
 # PHP Technical Test
 
-## Task 1
-The JSON file ocr.json contains the output of a scan of driving-licence.jpeg which was performed by a web service that can identify text in images.
-You should create a class with a method that extracts the following data from the ocr.json file and inserts the data into the driver table of the database.
+## Docker Notes
 
-- Firstname
-- Surname
-- Address Line 1
-- Address Line 2
-- Address Postcode
-- Licence Number
-- Date of birth
+1. Create Dockerfile
+It should contain **FROM** image.
+**RUN** install what we need like php extensions
+**COPY** our file to container.
 
-
-## Task 2
-Create another method in your class to retrieve a list of drivers who are over 50, and the total sum of the jobs they have done in December 2021 from the database.
-
-Your output should resemble
-
-> Driver 1 = £21.98
-> Driver 2 = £87.21 
-
-
-## Used Packages
-
-We have used simplon mysql package for connecting to the MySQL database.
-
-```terminal
-> composer require simplon/mysql
+2. Build Image
+Run following command to build an image based on our Dockerfile.
+```
+docker build -t php-docker .
 ```
 
+3. Create and run container
+Run following command to run container with given image name. This tells to use port 8000 on host (my computer) and 80 on the container. **php-docker** is the name of the image.
+```
+docker run -p 8000:80 php-docker
+```
+
+4. Create and run mysql container
+This creates a new container for running mysql server. We have also set environment variable using **-e**.
+We have also set volume to /var/lib/mysql location of the container.
+If the images are not present, the docker will fetch it from the docker hub.
+```
+docker run -p 33060:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -v db-volume:/var/lib/mysql --name db mysql:5.7
+```
+
+
+
+## Running a php script 
+
+```docker
+FROM php:7.4-cli
+COPY . /usr/src/myapp
+WORKDIR /usr/src/myapp
+CMD [ "php", "./index.php" ]
+```
 
 ## Extra
 

@@ -1,0 +1,14 @@
+version: "3.5"
+services:
+  web:
+    image: php-docker
+    ports:
+      - 8000:80
+  database:
+    image: mariadb:10.2
+    volumes:
+      - database_data:/var/lib/mysql
+    ports:
+      - 33060:3306
+volumes:
+  database_data:

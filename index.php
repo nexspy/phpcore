@@ -26,7 +26,7 @@ $config = [
     'database' => $_ENV['DB_NAME'],
 ];
 
-echo "PHP Applicaiton is running...";
+echo "PHP Applicaiton is running 3...";
 
 // $dbConn = DatabaseConnector::create($config);
 
