@@ -6,26 +6,31 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
 require __DIR__ . '/./vendor/autoload.php';
 
-require_once('./config/config.php');
+// require_once('./config/config.php');
 require_once('./src/DatabaseConnector.php');
 require_once('./src/LicenceReader.php');
 
 // $filename = './data/o.json';
 $filename = './data/ocr.json';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 // using factory class to get database connection object
 $config = [
-    'host' => DB_HOST,
-    'user' => DB_USER,
-    'password' => DB_PASSWORD,
-    'database' => DB_DATABASE,
+    'host' => $_ENV['DB_HOST'],
+    'user' => $_ENV['DB_USER'],
+    'password' => $_ENV['DB_PASSWORD'],
+    'database' => $_ENV['DB_NAME'],
 ];
-$dbConn = DatabaseConnector::create($config);
 
-$licenceReader = new LicenceReader($filename, $dbConn);
+echo "PHP Applicaiton is running...";
+
+// $dbConn = DatabaseConnector::create($config);
+
+// $licenceReader = new LicenceReader($filename, $dbConn);
 
 // Task 1 : read and save licence data to database
 /*
